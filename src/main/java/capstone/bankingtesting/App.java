@@ -18,6 +18,9 @@ public class App
     public static void main( String[] args ) throws InterruptedException, IOException
     {
     System.out.println("Script Started");	
+    
+    String testServerIp = FileUtils.readFileToString(new File("C:\\Users\\sairo\\Desktop\\terraform test\\test-ip.txt"), "UTF-8").trim().replaceAll("\"", "");
+    System.out.println("Test Server IP: " + testServerIp);
        //initializing the web driver
     //System.setProperty("webdriver.chrome.driver", "C:\\Users\\sairo\\Desktop\\DEvops\\Assignments\\chromedriver-win641\\chromedriver-win64\\chromedriver.exe");
     //setting properties
@@ -29,7 +32,8 @@ public class App
     //open url
     System.out.println("Driver opening up the url in browser");	
     WebDriver driver = new ChromeDriver(chromeOptions);
-    driver.get("http://localhost:8080/contact.html");	
+    driver.get("http://" + testServerIp + ":8080/contact.html");
+    //driver.get("http://localhost:8080/contact.html");	
     //invole implicit waits to load the page
     driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
     System.out.println("Enter details in the form");
