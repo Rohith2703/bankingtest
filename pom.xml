@@ -5,7 +5,7 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>capstone</groupId>
-  <artifactId>insurancetesting</artifactId>
+  <artifactId>banktesting</artifactId>
   <version>0.0.1-SNAPSHOT</version>
 
   <name>insurancetesting</name>
@@ -49,7 +49,7 @@
   </dependencies>
 
   <build>
-	  <finalName>insurancetesting</finalName>
+	  <finalName>bankingtesting</finalName>
 	  <plugins> 
     <plugin>
                <artifactId>maven-assembly-plugin</artifactId>
@@ -60,7 +60,7 @@
                    </descriptorRefs>
                    <archive>
                        <manifest>
-                           <mainClass>capstone.insurancetesting.App</mainClass>
+                           <mainClass>capstone.banktesting.App</mainClass>
                        </manifest>
                    </archive>
                </configuration>
