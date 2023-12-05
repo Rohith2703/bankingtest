@@ -38,6 +38,7 @@ public class App
     driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
     System.out.println("Enter details in the form");
     //enter details
+    Thread.sleep(2000);
     driver.findElement(By.name("Name")).sendKeys("Tony Stark");
     Thread.sleep(1000);
     driver.findElement(By.name("Phone Number")).sendKeys("9988998899");
