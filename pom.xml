@@ -5,7 +5,7 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>capstone</groupId>
-  <artifactId>banktesting</artifactId>
+  <artifactId>bankingtesting</artifactId>
   <version>0.0.1-SNAPSHOT</version>
 
   <name>insurancetesting</name>
@@ -60,7 +60,7 @@
                    </descriptorRefs>
                    <archive>
                        <manifest>
-                           <mainClass>capstone.banktesting.App</mainClass>
+                           <mainClass>capstone.bankingtesting.App</mainClass>
                        </manifest>
                    </archive>
                </configuration>
