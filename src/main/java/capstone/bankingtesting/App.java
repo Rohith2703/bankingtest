@@ -34,7 +34,7 @@ public class App
     System.out.println("Driver opening up the url in browser");	
     WebDriver driver = new ChromeDriver(chromeOptions);
     //driver.get("http://" + testServerIp + ":8080/contact.html");
-    driver.get("http://43.205.116.64:8080/contact.html");	
+    driver.get("http://43.205.116.64:8090/contact.html");	
     //invole implicit waits to load the page
     driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
     System.out.println("Enter details in the form");
