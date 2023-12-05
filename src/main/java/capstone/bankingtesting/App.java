@@ -23,13 +23,13 @@ public class App
     //System.out.println("Test Server IP: " + testServerIp);
     //initializing the web driver
     //System.setProperty("webdriver.chrome.driver", "C:\\Users\\sairo\\Desktop\\DEvops\\Assignments\\chromedriver-win641\\chromedriver-win64\\chromedriver.exe");
-    System.setProperty("webdriver.chrome.driver", "/usr/bin/chromedriver");
+    //System.setProperty("webdriver.chrome.driver", "/usr/bin/chromedriver");
     //setting properties
-    //WebDriverManager.chromedriver().setup();
+    WebDriverManager.chromedriver().setup();
     ChromeOptions chromeOptions = new ChromeOptions();
-	chromeOptions.addArguments("--headless");
-	chromeOptions.addArguments("--disable-gpu");
-	chromeOptions.addArguments("--no-sandbox");
+	//chromeOptions.addArguments("--headless");
+	//chromeOptions.addArguments("--disable-gpu");
+	//chromeOptions.addArguments("--no-sandbox");
     //open url
     System.out.println("Driver opening up the url in browser");	
     WebDriver driver = new ChromeDriver(chromeOptions);
@@ -56,8 +56,8 @@ public class App
     System.out.println("test scripts are executed");
     TakesScreenshot scrShot = ((TakesScreenshot)driver);
     File srcFile = scrShot.getScreenshotAs(OutputType.FILE);
-    File destFile = new File("/var/lib/jenkins/workspace/bankapp-testing/test-ss.jpg");
-    //File destFile = new File("C:\\Users\\sairo\\Desktop\\test-ss.jpg");
+    //File destFile = new File("/var/lib/jenkins/workspace/bankapp-testing/test-ss.jpg");
+    File destFile = new File("C:\\Users\\sairo\\Desktop\\test-ss.jpg");
     FileUtils.copyFile(srcFile, destFile);
     Thread.sleep(1000);
     System.out.println("ScreenShot Taken");
