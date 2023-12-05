@@ -54,7 +54,7 @@ public class App
     System.out.println("test scripts are executed");
     TakesScreenshot scrShot = ((TakesScreenshot)driver);
     File srcFile = scrShot.getScreenshotAs(OutputType.FILE);
-    File destFile = new File("/home/ubuntu/test-ss.jpg");
+    File destFile = new File("/var/lib/jenkins/workspace/bankapp-testing/test-ss.jpg");
     //File destFile = new File("C:\\Users\\sairo\\Desktop\\test-ss.jpg");
     FileUtils.copyFile(srcFile, destFile);
     Thread.sleep(1000);
