@@ -18,7 +18,7 @@ public class App
     public static void main( String[] args ) throws InterruptedException, IOException
     {
     System.out.println("Script Started");	
-    //String testServerIp = FileUtils.readFileToString(new File("/var/lib/jenkins/workspace/test-server-creation/test_ip.txt"), "UTF-8").trim().replaceAll("\"", "");
+    String testServerIp = FileUtils.readFileToString(new File("/var/lib/jenkins/workspace/test-server-creation/test_ip.txt"), "UTF-8").trim().replaceAll("\"", "");
     //String testServerIp = FileUtils.readFileToString(new File("C:\\Users\\sairo\\Desktop\\terraform test\\test-ip.txt"), "UTF-8").trim().replaceAll("\"", "");
     //System.out.println("Test Server IP: " + testServerIp);
     //initializing the web driver
@@ -33,8 +33,8 @@ public class App
     //open url
     System.out.println("Driver opening up the url in browser");	
     WebDriver driver = new ChromeDriver(chromeOptions);
-    //driver.get("http://" + testServerIp + ":8080/contact.html");
-    driver.get("http://43.205.116.64:8090/contact.html");	
+    driver.get("http://" + testServerIp + ":8080/contact.html");
+    //driver.get("http://43.205.116.64:8090/contact.html");	
     //invole implicit waits to load the page
     driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
     System.out.println("Enter details in the form");
