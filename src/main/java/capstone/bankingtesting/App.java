@@ -20,7 +20,7 @@ public class App
     System.out.println("Script Started");	
     String testServerIp = FileUtils.readFileToString(new File("/var/lib/jenkins/workspace/test-server-creation/test_ip.txt"), "UTF-8").trim().replaceAll("\"", "");
     //String testServerIp = FileUtils.readFileToString(new File("C:\\Users\\sairo\\Desktop\\terraform test\\test-ip.txt"), "UTF-8").trim().replaceAll("\"", "");
-    //System.out.println("Test Server IP: " + testServerIp);
+    System.out.println("Test Server IP: " + testServerIp);
     //initializing the web driver
     //System.setProperty("webdriver.chrome.driver", "C:\\Users\\sairo\\Desktop\\DEvops\\Assignments\\chromedriver-win641\\chromedriver-win64\\chromedriver.exe");
     //System.setProperty("webdriver.chrome.driver", "/usr/bin/chromedriver");
@@ -34,19 +34,19 @@ public class App
     System.out.println("Driver opening up the url in browser");	
     WebDriver driver = new ChromeDriver(chromeOptions);
     driver.get("http://" + testServerIp + ":8080/contact.html");
-    //driver.get("http://43.205.116.64:8090/contact.html");	
+    //driver.get("http://localhost:8080/contact.html");	
     //invole implicit waits to load the page
     driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
     System.out.println("Enter details in the form");
     //enter details
-    Thread.sleep(10000);
-    driver.findElement(By.name("Name")).sendKeys("Tony Stark");
     Thread.sleep(2000);
-    driver.findElement(By.name("Phone Number")).sendKeys("9988998899");
+    driver.findElement(By.id("Name")).sendKeys("Tony Stark");
     Thread.sleep(2000);
-    driver.findElement(By.name("Email")).sendKeys("IRONMAN@xyz.com");
+    driver.findElement(By.id("Phone Number")).sendKeys("9988998899");
     Thread.sleep(2000);
-    driver.findElement(By.name("Message")).sendKeys("Hi, Iam intrested in FINANCE");
+    driver.findElement(By.id("Email")).sendKeys("IRONMAN@xyz.com");
+    Thread.sleep(2000);
+    driver.findElement(By.id("Message")).sendKeys("Hi, Iam intrested in FINANCE");
     Thread.sleep(2000);
     driver.findElement(By.id("submit")).click();
     Thread.sleep(2000);
