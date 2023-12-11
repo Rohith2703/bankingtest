@@ -50,8 +50,8 @@ public class App
     Thread.sleep(2000);
     driver.findElement(By.id("submit")).click();
     Thread.sleep(2000);
-    String response = driver.findElement(By.id("message")).getText();
-    System.out.println(response);
+    String message = driver.findElement(By.id("message")).getText();
+    System.out.println(message);
     Thread.sleep(2000);
     System.out.println("test scripts are executed");
     TakesScreenshot scrShot = ((TakesScreenshot)driver);
