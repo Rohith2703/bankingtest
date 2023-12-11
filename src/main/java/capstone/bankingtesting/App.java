@@ -12,55 +12,74 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import io.github.bonigarcia.wdm.WebDriverManager;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class App 
-{
-    public static void main( String[] args ) throws InterruptedException, IOException
-    {
-    System.out.println("Script Started");	
-    String testServerIp = FileUtils.readFileToString(new File("/var/lib/jenkins/workspace/test-server-creation/test_ip.txt"), "UTF-8").trim().replaceAll("\"", "");
-    //String testServerIp = FileUtils.readFileToString(new File("C:\\Users\\sairo\\Desktop\\terraform test\\test-ip.txt"), "UTF-8").trim().replaceAll("\"", "");
-    System.out.println("Test Server IP: " + testServerIp);
-    //initializing the web driver
-    //System.setProperty("webdriver.chrome.driver", "C:\\Users\\sairo\\Desktop\\DEvops\\Assignments\\chromedriver-win641\\chromedriver-win64\\chromedriver.exe");
-    //System.setProperty("webdriver.chrome.driver", "/usr/bin/chromedriver");
-    //setting properties
-    WebDriverManager.chromedriver().setup();
-    ChromeOptions chromeOptions = new ChromeOptions();
-	chromeOptions.addArguments("--headless");
-	//chromeOptions.addArguments("--disable-gpu");
-	//chromeOptions.addArguments("--no-sandbox");
-    //open url
-    System.out.println("Driver opening up the url in browser");	
-    WebDriver driver = new ChromeDriver(chromeOptions);
-    driver.get("http://" + testServerIp + ":8080/contact.html");
-    //driver.get("http://localhost:8080/contact.html");	
-    //invole implicit waits to load the page
-    driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
-    System.out.println("Enter details in the form");
-    //enter details
-    Thread.sleep(2000);
-    driver.findElement(By.id("Name")).sendKeys("Tony Stark");
-    Thread.sleep(2000);
-    driver.findElement(By.id("Phone Number")).sendKeys("9988998899");
-    Thread.sleep(2000);
-    driver.findElement(By.id("Email")).sendKeys("IRONMAN@xyz.com");
-    Thread.sleep(2000);
-    driver.findElement(By.id("Message")).sendKeys("Hi, Iam intrested in FINANCE");
-    Thread.sleep(2000);
-    driver.findElement(By.id("submit")).click();
-    Thread.sleep(2000);
-    String message = driver.findElement(By.id("message")).getText();
-    System.out.println(message);
-    Thread.sleep(2000);
-    System.out.println("test scripts are executed");
-    TakesScreenshot scrShot = ((TakesScreenshot)driver);
-    File srcFile = scrShot.getScreenshotAs(OutputType.FILE);
-    File destFile = new File("/var/lib/jenkins/workspace/bankapp-testing/test-ss.jpg");
-    //File destFile = new File("C:\\Users\\sairo\\Desktop\\test-ss.jpg");
-    FileUtils.copyFile(srcFile, destFile);
-    Thread.sleep(1000);
-    System.out.println("ScreenShot Taken");
-    driver.quit();
+public class App {
+    public static void main(String[] args) throws InterruptedException, IOException {
+        System.out.println("Script Started");
+
+        // Read test server IP from file
+        //String testServerIp = FileUtils.readFileToString(new File("/var/lib/jenkins/workspace/test-server-creation/test_ip.txt"), "UTF-8").trim().replaceAll("\"", "");
+        String testServerIp = FileUtils.readFileToString(new File("C:\\Users\\sairo\\Desktop\\terraform test\\test-ip.txt"), "UTF-8").trim().replaceAll("\"", "");
+        System.out.println("Test Server IP: " + testServerIp);
+
+        // Setup WebDriver
+        WebDriverManager.chromedriver().setup();
+        ChromeOptions chromeOptions = new ChromeOptions();
+        //chromeOptions.addArguments("--headless");
+
+        // Open URL
+        System.out.println("Driver opening up the URL in the browser");
+        WebDriver driver = new ChromeDriver(chromeOptions);
+
+        try {
+            driver.get("http://" + testServerIp + ":8080/contact.html");
+
+            // Implicit wait
+            driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+
+            System.out.println("Enter details in the form");
+
+            // Enter details
+            WebDriverWait wait = new WebDriverWait(driver, 10);
+
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("Name"))).sendKeys("Tony Stark");
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("Phone Number"))).sendKeys("9988998899");
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("Email"))).sendKeys("IRONMAN@xyz.com");
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("Message"))).sendKeys("Hi, I am interested in FINANCE");
+
+            wait.until(ExpectedConditions.elementToBeClickable(By.id("submit"))).click();
+
+            String message = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("message"))).getText();
+            System.out.println(message);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            // Close the WebDriver in the finally block
+            if (driver != null) {
+                driver.quit();
+            }
+        }
+
+        System.out.println("Test scripts are executed");
+
+        // Take screenshot
+        driver = new ChromeDriver(chromeOptions);
+        try {
+            TakesScreenshot scrShot = ((TakesScreenshot) driver);
+            File srcFile = scrShot.getScreenshotAs(OutputType.FILE);
+            //File destFile = new File("/var/lib/jenkins/workspace/bankapp-testing/test-ss.jpg");
+            File destFile = new File("C:\\Users\\sairo\\Desktop\\test-ss.jpg");
+            FileUtils.copyFile(srcFile, destFile);
+            System.out.println("Screenshot taken");
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            // Close the WebDriver in the finally block
+            if (driver != null) {
+                driver.quit();
+            }
+        }
     }
 }
