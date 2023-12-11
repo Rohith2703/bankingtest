@@ -20,14 +20,14 @@ public class App {
         System.out.println("Script Started");
 
         // Read test server IP from file
-        //String testServerIp = FileUtils.readFileToString(new File("/var/lib/jenkins/workspace/test-server-creation/test_ip.txt"), "UTF-8").trim().replaceAll("\"", "");
-        String testServerIp = FileUtils.readFileToString(new File("C:\\Users\\sairo\\Desktop\\terraform test\\test-ip.txt"), "UTF-8").trim().replaceAll("\"", "");
+        String testServerIp = FileUtils.readFileToString(new File("/var/lib/jenkins/workspace/test-server-creation/test_ip.txt"), "UTF-8").trim().replaceAll("\"", "");
+        //String testServerIp = FileUtils.readFileToString(new File("C:\\Users\\sairo\\Desktop\\terraform test\\test-ip.txt"), "UTF-8").trim().replaceAll("\"", "");
         System.out.println("Test Server IP: " + testServerIp);
 
         // Setup WebDriver
         WebDriverManager.chromedriver().setup();
         ChromeOptions chromeOptions = new ChromeOptions();
-        //chromeOptions.addArguments("--headless");
+        chromeOptions.addArguments("--headless");
 
         // Open URL
         System.out.println("Driver opening up the URL in the browser");
@@ -69,8 +69,8 @@ public class App {
         try {
             TakesScreenshot scrShot = ((TakesScreenshot) driver);
             File srcFile = scrShot.getScreenshotAs(OutputType.FILE);
-            //File destFile = new File("/var/lib/jenkins/workspace/bankapp-testing/test-ss.jpg");
-            File destFile = new File("C:\\Users\\sairo\\Desktop\\test-ss.jpg");
+            File destFile = new File("/var/lib/jenkins/workspace/bankapp-testing/test-ss.jpg");
+            //File destFile = new File("C:\\Users\\sairo\\Desktop\\test-ss.jpg");
             FileUtils.copyFile(srcFile, destFile);
             System.out.println("Screenshot taken");
         } catch (Exception e) {
